@@ -30,7 +30,7 @@ for species in ${species_list[@]}; do
 	echo "Processing ${species}"
 	cd ${WD}/03_Merging/${species}_merging/okayset
 
-	cp Transfuse_${species}_all.rn.okay ${species}_final.fasta
+	cp Transfuse_${species}_all.rn.okay ${species}_final_raw.fasta
 	
 #BUSCO	
 	nohup BUSCO2_start.sh ${species}_final.fasta 50 
@@ -43,10 +43,10 @@ for species in ${species_list[@]}; do
 	left3=$WD/02_Assemblies/${species}_${samples[2]}_Trinity/insilico_read_normalization/left.norm.fq
 	right3=$WD/02_Assemblies/${species}_${samples[2]}_Trinity/insilico_read_normalization/right.norm.fq
 	
-	${transrate1} --assembly=${species}_final.fasta \
+	${transrate1} --assembly=${species}_final_raw.fasta \
 		--left=${left1},${left2},${left3} \
 		--right=${right1},${right2},${right3} \
-		--threads=50 --output=${species}_final
+		--threads=50 --output=${species}_final_raw
 		
 done
 
